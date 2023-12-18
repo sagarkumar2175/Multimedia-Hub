@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Multimedia Hub</string>
+    <string name="pdfs">PDFs</string>
+    <string name="images">IMAGES</string>
+    <string name="music">MUSIC</string>
+    <string name="videos">VIDEOs</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Audio">AUDIO</string>
+    <string name="images_small">Images</string>
+    <string name="videos_small">Videos</string>
+    <string name="audio_small">Audio</string>
 </resources>

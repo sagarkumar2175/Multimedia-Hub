@@ -1,27 +1,16 @@
-package com.example.multimediahub.Adapter;
+package com.example.multimediahub.Adapter
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-import java.util.ArrayList;
-
-public class AdapterViewPager extends FragmentStateAdapter {
-    ArrayList<Fragment> arr;
-    public AdapterViewPager(@NonNull FragmentActivity fragmentActivity, ArrayList<Fragment> arr) {
-        super(fragmentActivity);
-        this.arr = arr;
+class AdapterViewPager(fragmentActivity: FragmentActivity, var arr: ArrayList<Fragment>) :
+    FragmentStateAdapter(fragmentActivity) {
+    override fun createFragment(position: Int): Fragment {
+        return arr[position]
     }
 
-    @NonNull
-    @Override
-    public Fragment createFragment(int position) {
-        return arr.get(position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return arr.size();
+    override fun getItemCount(): Int {
+        return arr.size
     }
 }

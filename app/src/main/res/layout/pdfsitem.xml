@@ -1,63 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:id="@+id/pdf_container"
-    app:cardBackgroundColor="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        android:layout_marginStart="8dp"
+        app:cardBackgroundColor="@color/white">
+
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/white"
-        android:layout_margin="8dp"
-        android:gravity="center_vertical">
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:padding="8dp">
 
+            <ImageView
+            android:id="@+id/imgPdf"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_weight="0.2"
+            android:src="@drawable/img">
+            </ImageView>
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:padding="8dp"
-        android:id="@+id/pdf_item"
-        android:src="@drawable/baseline_picture_as_pdf_24"
-        >
-
-    </ImageView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:id="@+id/tv_pdfName"
-            android:text="File Name.pdf"
+            <TextView
+            android:id="@+id/textPdfName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:padding="6dp"
             android:textColor="@color/black"
+            android:text="Pdf Name"
             android:textSize="18sp"
-            android:layout_marginLeft="10dp"
-            android:ellipsize="marquee"
             android:singleLine="true"
+            android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
-            android:textAlignment="gravity"
-            android:gravity="center_vertical">
-
-        </TextView>
-        <TextView
-            android:id="@+id/tvPDFSize"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/dark_grey"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </TextView>
-
-    </LinearLayout>
-
-    </LinearLayout>
+            android:scrollHorizontally="true">
+            </TextView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
-</androidx.cardview.widget.CardView>
+</RelativeLayout>

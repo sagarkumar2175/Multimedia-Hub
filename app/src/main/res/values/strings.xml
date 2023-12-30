@@ -10,4 +10,7 @@
     <string name="images_small">Images</string>
     <string name="videos_small">Videos</string>
     <string name="audio_small">Audio</string>
+    <string name="title_activity_full_screen">FullScreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

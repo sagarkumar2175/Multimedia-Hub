@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".fragment.FragmentImage"
+    tools:context=".fragment.FragmentImages"
     android:orientation="vertical">
 
     <LinearLayout
@@ -19,15 +19,15 @@
 
         </ImageView>
 
-    <TextView
-        android:id="@+id/tv_image"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:textColor="@color/black"
-        android:gravity="center_vertical"
-        android:textSize="20dp"
-        android:text="Images" >
-    </TextView>
+        <TextView
+            android:id="@+id/tv_image"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:text="Images" >
+        </TextView>
 
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView

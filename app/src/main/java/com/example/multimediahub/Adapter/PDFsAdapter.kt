@@ -12,7 +12,7 @@ import java.io.File
 class PDFsAdapter(private val context: Context, private val pdffiles: List<String>) : RecyclerView.Adapter<PDFsAdapter.PDFsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PDFsViewHolder {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.imageitem, parent, false)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.pdfsitem, parent, false)
         return PDFsViewHolder(view)
     }
 

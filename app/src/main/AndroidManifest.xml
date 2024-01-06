@@ -17,10 +17,10 @@
         tools:targetApi="33">
         <activity
             android:name=".FullScreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            android:label="@string/title_activity_full_screen"
-            android:theme="@style/Theme.MultimediaHub.Fullscreen" />
+            android:exported="false" />
+        <activity
+            android:name=".MusicPlayerActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -1,16 +1,8 @@
 <resources>
     <string name="app_name">Multimedia Hub</string>
-    <string name="pdfs">PDFs</string>
-    <string name="images">IMAGES</string>
-    <string name="music">MUSIC</string>
-    <string name="videos">VIDEOs</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="Audio">AUDIO</string>
-    <string name="images_small">Images</string>
-    <string name="videos_small">Videos</string>
-    <string name="audio_small">Audio</string>
-    <string name="title_activity_full_screen">FullScreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="previous">previous</string>
+    <string name="play_pause">play_pause\n</string>
+    <string name="next">next</string>
 </resources>

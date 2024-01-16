@@ -1,90 +1,122 @@
 package com.example.multimediahub
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
-import com.example.multimediahub.Adapter.AdapterViewPager
-import com.example.multimediahub.R
-import com.example.multimediahub.fragment.FragmentAudio
-import com.example.multimediahub.fragment.FragmentImages
-import com.example.multimediahub.fragment.FragmentPDFs
-import com.example.multimediahub.fragment.FragmentVideos
+import android.os.Environment
+import android.provider.Settings
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import com.example.multimediahub.Adapter.MyPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
 
-    private var pagerMain: ViewPager2? = null
-    private var fragmentArrayList = ArrayList<Fragment>()
-    var bottomNav: BottomNavigationView? = null
+    private lateinit var viewPager: ViewPager
+    private lateinit var bottomNav: BottomNavigationView
+//    private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
+//    private var isReadPermissionGranted = false
+//    private var isAudioPermissionGranted = false
+//    private var isImagesPermissionGranted = false
+//    private var isVideoPermissionGranted = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
-        pagerMain = findViewById(R.id.pagerMain)
-        bottomNav = findViewById(R.id.bottomNav)
 
-        fragmentArrayList.add(FragmentPDFs())
-        fragmentArrayList.add(FragmentImages())
-        fragmentArrayList.add(FragmentVideos())
-        fragmentArrayList.add(FragmentAudio())
-        val adapterViewPager = AdapterViewPager(this, fragmentArrayList)
+        checkAndRequestStoragePermission()
 
-        pagerMain?.adapter = adapterViewPager
-        pagerMain?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        viewPager = findViewById(R.id.viewPager)
+        bottomNav = findViewById(R.id.bottom_nav)
+
+        val adapter = MyPagerAdapter(supportFragmentManager)
+        viewPager.adapter = adapter
+
+        // Set up ViewPager to change fragment on swipe
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
             override fun onPageSelected(position: Int) {
-                when (position) {
-                    0 -> {
-                        bottomNav?.selectedItemId = R.id.itPDFs
-                    }
-
-                    1 -> {
-                        bottomNav?.selectedItemId = R.id.itImages
-                    }
-
-                    2 -> {
-                        bottomNav?.selectedItemId = R.id.itVideos
-                    }
-
-                    3 -> {
-                        bottomNav?.selectedItemId = R.id.itAudio
-                    }
-                }
-                super.onPageSelected(position)
+                // Update BottomNavigationView when ViewPager page changes
+                bottomNav.menu.getItem(position).isChecked = true
             }
+
+            override fun onPageScrollStateChanged(state: Int) {}
         })
 
-        bottomNav?.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.itPDFs -> {
-                    pagerMain?.currentItem = 0
-                }
-
-                R.id.itImages -> {
-                    pagerMain?.currentItem = 1
-                }
-
-                R.id.itVideos -> {
-                    pagerMain?.currentItem = 2
-                }
-
-                R.id.itAudio -> {
-                    pagerMain?.currentItem = 3
-                }
+        // Set up BottomNavigationView to change ViewPager page on item click
+        bottomNav.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.action_images -> viewPager.currentItem = 0
+                R.id.action_pdf -> viewPager.currentItem = 1
+                R.id.action_music -> viewPager.currentItem = 2
+                R.id.action_video -> viewPager.currentItem = 3
             }
             true
-        })
-
+        }
     }
 
+    private fun checkAndRequestStoragePermission() {
+        // Check and request storage-related permissions
+//        permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+//            isReadPermissionGranted = permissions[Manifest.permission.READ_EXTERNAL_STORAGE] ?: isReadPermissionGranted
+//            isAudioPermissionGranted = permissions[Manifest.permission.READ_MEDIA_AUDIO] ?: isAudioPermissionGranted
+//            isImagesPermissionGranted = permissions[Manifest.permission.READ_MEDIA_IMAGES] ?: isImagesPermissionGranted
+//            isVideoPermissionGranted = permissions[Manifest.permission.READ_MEDIA_VIDEO] ?: isVideoPermissionGranted
+//        }
+//        requestPermission()
+
+        // If the Android version is equal to or greater than Android 11 (R)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                // Request "Manage All Files Access" permission
+                val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+                startActivity(intent)
+            }
+        }
+    }
+
+//    private fun requestPermission() {
+//        isReadPermissionGranted = ContextCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.READ_EXTERNAL_STORAGE
+//        ) == PackageManager.PERMISSION_GRANTED
+//
+//        isAudioPermissionGranted = ContextCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.READ_MEDIA_AUDIO
+//        ) == PackageManager.PERMISSION_GRANTED
+//
+//        isImagesPermissionGranted = ContextCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.READ_MEDIA_IMAGES
+//        ) == PackageManager.PERMISSION_GRANTED
+//
+//        isVideoPermissionGranted = ContextCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.READ_MEDIA_VIDEO
+//        ) == PackageManager.PERMISSION_GRANTED
+//
+//        val permissionRequest: MutableList<String> = ArrayList()
+//
+//        if (!isReadPermissionGranted) {
+//            permissionRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+//        }
+//
+//        if (!isAudioPermissionGranted) {
+//            permissionRequest.add(Manifest.permission.READ_MEDIA_AUDIO)
+//        }
+//
+//        if (!isImagesPermissionGranted) {
+//            permissionRequest.add(Manifest.permission.READ_MEDIA_IMAGES)
+//        }
+//
+//        if (!isVideoPermissionGranted) {
+//            permissionRequest.add(Manifest.permission.READ_MEDIA_VIDEO)
+//        }
+//
+//        if (permissionRequest.isNotEmpty()) {
+//            permissionLauncher.launch(permissionRequest.toTypedArray())
+//        }
+//    }
 }
-
-
-
-
-
-
-
-

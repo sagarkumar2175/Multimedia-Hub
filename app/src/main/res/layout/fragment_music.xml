@@ -1,41 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".fragment.FragmentVideos"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp">
         <ImageView
-            android:id="@+id/video_icon"
             android:padding="14dp"
-            android:src="@drawable/baseline_video_file_24"
+            android:src="@drawable/baseline_audio_file_24"
             android:layout_width="60dp"
             android:layout_height="60dp">
 
         </ImageView>
 
         <TextView
-            android:id="@+id/tv_videos"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:textColor="@color/black"
             android:gravity="center_vertical"
             android:textSize="20dp"
-            android:text="Videos" >
+            android:text="Audio" >
         </TextView>
 
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_Videos"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/musicRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"/>
+
 
 </LinearLayout>
-

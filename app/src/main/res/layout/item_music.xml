@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#EFEFEF"
+    android:background="@color/white"
     android:layout_marginTop="5dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
@@ -16,13 +16,13 @@
         android:layout_height="36dp"
         android:id="@+id/icon_view"
         android:layout_centerVertical="true"
-        android:src="@drawable/img_1"/>
+        android:src="@drawable/music"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:id="@+id/music_title_text"
+        android:id="@+id/musicTextView"
         android:layout_toEndOf="@id/icon_view"
         android:padding="10dp"
         android:maxLines="1"
@@ -31,3 +31,4 @@
         android:textColor="@color/black"/>
 
 </RelativeLayout>
+

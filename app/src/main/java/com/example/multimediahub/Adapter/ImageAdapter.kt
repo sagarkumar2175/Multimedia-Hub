@@ -8,34 +8,40 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.multimediahub.FullScreenActivity
-import com.example.multimediahub.ImageModal
+import com.example.multimediahub.Activity.ImageViewerActivity
 import com.example.multimediahub.R
-import java.util.ArrayList
 
-class ImageAdapter(private val list: ArrayList<ImageModal>, private val context: Context?) : RecyclerView.Adapter<ImageAdapter.ImageviewHolder>() {
+class ImageAdapter(private val context: Context, private val imageList: List<String>) : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageviewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.imageitem, parent, false)
-
-        return ImageviewHolder(view)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val imageView: ImageView = itemView.findViewById(R.id.imageView)
     }
 
-    override fun onBindViewHolder(holder: ImageviewHolder, position: Int) {
-        Glide.with(context!!).load(list[position].getPath()).into(holder.imageView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)
+        return ViewHolder(view)
+    }
 
-        holder.imageView.setOnClickListener {
-            val parseData = list[position].getPath().toString()
-            context.startActivity(Intent(context, FullScreenActivity::class.java).putExtra("parseData", parseData))
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        // Load image into ImageView using Glide
+        Glide.with(holder.itemView.context)
+            .load(imageList[position])
+            .placeholder(R.drawable.baseline_image_24)
+            .error(R.drawable.baseline_image_not_supported_24)
+            .into(holder.imageView)
+
+        // Handle item click to open the image viewer activity
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, ImageViewerActivity::class.java)
+            intent.putExtra("parseData", imageList[position])
+            context.startActivity(intent)
         }
 
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return imageList.size
     }
 
-    inner class ImageviewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ImageView = itemView.findViewById(R.id.img_item)
-    }
 }
+

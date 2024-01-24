@@ -9,7 +9,7 @@
         android:layout_height="60dp">
         <ImageView
             android:padding="14dp"
-            android:src="@drawable/baseline_video_file_24"
+            android:src="@drawable/outline_video_file_24"
             android:layout_width="60dp"
             android:layout_height="60dp">
 

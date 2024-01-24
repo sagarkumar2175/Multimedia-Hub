@@ -6,12 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"/>
+
+
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_alignParentBottom="true"
         app:cardCornerRadius="20dp"
@@ -20,6 +26,8 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="8dp"
         android:layout_height="wrap_content">
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
@@ -30,5 +38,12 @@
         app:itemTextColor="@color/color_item_bottom_nav"
         app:menu="@menu/bottom_navigation_menu" />
 
+
+
     </androidx.cardview.widget.CardView>
+
+
+
 </RelativeLayout>
+
+

@@ -1,6 +1,7 @@
 package com.example.multimediahub.Fragment
 
 import android.content.ContentResolver
+import android.content.res.Configuration
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -24,10 +25,25 @@ class ImagesFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_images, container, false)
 
         recyclerView = view.findViewById(R.id.imagesRecyclerView)
+
+        // Check the current orientation and set the initial span count
+        val spanCount = if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            4
+        } else {
+            2
+        }
+
         imageAdapter = ImageAdapter(requireContext(), getImageList(requireContext().contentResolver))
 
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = GridLayoutManager(context, spanCount)
         recyclerView.adapter = imageAdapter
+
+        // Scroll to the end of the RecyclerView
+        val lastItemPosition = imageAdapter.itemCount - 1
+        if (lastItemPosition >= 0) {
+            recyclerView.scrollToPosition(lastItemPosition)
+        }
+
 
         return view
     }

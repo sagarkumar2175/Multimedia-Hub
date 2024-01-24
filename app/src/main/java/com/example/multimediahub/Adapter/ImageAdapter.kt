@@ -30,12 +30,14 @@ class ImageAdapter(private val context: Context, private val imageList: List<Str
             .error(R.drawable.baseline_image_not_supported_24)
             .into(holder.imageView)
 
-        // Handle item click to open the image viewer activity
+        // Inside ImageAdapter onBindViewHolder method
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ImageViewerActivity::class.java)
-            intent.putExtra("parseData", imageList[position])
+            intent.putStringArrayListExtra("imageUrls", imageList as ArrayList<String>)
+            intent.putExtra("position", position)
             context.startActivity(intent)
         }
+
 
     }
 

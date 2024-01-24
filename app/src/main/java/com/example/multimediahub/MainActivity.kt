@@ -5,7 +5,13 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
+import android.view.View
+import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
+import androidx.core.widget.NestedScrollView
 import androidx.viewpager.widget.ViewPager
 import com.example.multimediahub.Adapter.MyPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -14,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager
     private lateinit var bottomNav: BottomNavigationView
+
 //    private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
 //    private var isReadPermissionGranted = false
 //    private var isAudioPermissionGranted = false
@@ -29,8 +36,11 @@ class MainActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPager)
         bottomNav = findViewById(R.id.bottom_nav)
 
+
         val adapter = MyPagerAdapter(supportFragmentManager)
         viewPager.adapter = adapter
+
+
 
         // Set up ViewPager to change fragment on swipe
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -119,4 +129,6 @@ class MainActivity : AppCompatActivity() {
 //            permissionLauncher.launch(permissionRequest.toTypedArray())
 //        }
 //    }
+
+
 }

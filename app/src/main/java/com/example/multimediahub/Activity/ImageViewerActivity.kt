@@ -60,7 +60,7 @@ class ImageViewerActivity : AppCompatActivity() {
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
         private val animationDuration = 300L
-        private val flingThreshold = 2500 // Adjust sensitivity as needed
+        private val flingThreshold = 3000 // Adjust sensitivity as needed
 
         override fun onDoubleTap(e: MotionEvent): Boolean {
             // Double-tap gesture, reset the image size to normal

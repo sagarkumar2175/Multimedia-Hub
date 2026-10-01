@@ -18,6 +18,11 @@ import com.example.multimediahub.R
 import java.util.concurrent.TimeUnit
 
 class VideoPlayerActivity : AppCompatActivity() {
+    companion object {
+        var videoList: List<com.example.multimediahub.Fragment.VideoFragment.VideoData>? = null
+    }
+
+    private var currentPosition: Int = 0
     private lateinit var player: ExoPlayer
     private lateinit var playerView: PlayerView
     private lateinit var videoImageView: ImageView
@@ -53,38 +58,45 @@ class VideoPlayerActivity : AppCompatActivity() {
         replay5SecButton = findViewById(R.id.replay5Sec)
         skip5SecButton = findViewById(R.id.skip5Sec)
 
-        val videoPath = intent.getStringExtra("VIDEO_PATH") ?: return
-        val videoTitle = intent.getStringExtra("VIDEO_TITLE") ?: "Unknown Title"
+        findViewById<ImageView>(R.id.btnBack).setOnClickListener {
+            finish()
+        }
 
-        findViewById<TextView>(R.id.videoTitle).text = videoTitle
-
-        val mediaItem = MediaItem.fromUri(videoPath)
-        player.setMediaItem(mediaItem)
-        player.prepare()
+        currentPosition = intent.getIntExtra("position", -1)
+        if (currentPosition == -1 || videoList == null) return
 
         player.addListener(object : Player.Listener {
-            override fun onPlaybackStateChanged(playbackState: Int) {
-                super.onPlaybackStateChanged(playbackState)
-                // Handle playback state changes if needed
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                if (isPlaying) {
+                    playPauseButton.setImageResource(R.drawable.outline_pause_circle_outline_24)
+                } else {
+                    playPauseButton.setImageResource(R.drawable.outline_play_circle_24)
+                }
             }
         })
+
+        playVideoAt(currentPosition)
 
         playPauseButton.setOnClickListener {
             if (player.isPlaying) {
                 player.pause()
-                playPauseButton.setImageResource(R.drawable.outline_play_circle_24)
             } else {
                 player.play()
-                playPauseButton.setImageResource(R.drawable.outline_pause_circle_outline_24)
             }
         }
 
         nextButton.setOnClickListener {
-            // Handle skip to next video
+            if (videoList != null && currentPosition < videoList!!.size - 1) {
+                currentPosition++
+                playVideoAt(currentPosition)
+            }
         }
 
         prevButton.setOnClickListener {
-            // Handle skip to previous video
+            if (videoList != null && currentPosition > 0) {
+                currentPosition--
+                playVideoAt(currentPosition)
+            }
         }
 
         replay5SecButton.setOnClickListener {
@@ -144,11 +156,6 @@ class VideoPlayerActivity : AppCompatActivity() {
             }
         })
 
-        // Load and set video thumbnail to ImageView
-        Glide.with(this)
-            .load(videoPath) // You can use the actual thumbnail path or generate one
-            .into(videoImageView)
-
         // Attach the player to the PlayerView
         playerView.player = player
     }
@@ -167,8 +174,22 @@ class VideoPlayerActivity : AppCompatActivity() {
     }
 
     private fun seekToCurrentPosition(offsetMillis: Long) {
-        val currentPosition = player.currentPosition
-        val newPosition = currentPosition + offsetMillis
+        val currentPositionMillis = player.currentPosition
+        val newPosition = currentPositionMillis + offsetMillis
         player.seekTo(newPosition.coerceIn(0, player.duration))
+    }
+
+    private fun playVideoAt(position: Int) {
+        val video = videoList!![position]
+        findViewById<TextView>(R.id.videoTitle).text = video.title
+
+        val mediaItem = MediaItem.fromUri(video.path)
+        player.setMediaItem(mediaItem)
+        player.prepare()
+        player.play()
+
+        Glide.with(this)
+            .load(video.path)
+            .into(videoImageView)
     }
 }

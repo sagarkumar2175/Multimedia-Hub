@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.example.multimediahub"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -58,7 +58,7 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 
-    implementation ("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
+    implementation ("com.github.mhiew:android-pdf-viewer:3.2.0-beta.3")
     implementation ("androidx.media3:media3-exoplayer:1.2.1")
     implementation ("androidx.media3:media3-exoplayer-dash:1.2.1")
     implementation ("androidx.media3:media3-ui:1.2.1")

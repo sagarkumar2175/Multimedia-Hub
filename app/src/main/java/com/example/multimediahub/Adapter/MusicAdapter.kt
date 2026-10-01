@@ -9,7 +9,7 @@ import com.example.multimediahub.R
 
 class MusicAdapter(
     private val musicList: List<MediaMetadata>,
-    private val itemClickListener: (MediaMetadata) -> Unit
+    private val itemClickListener: (position: Int, metadata: MediaMetadata) -> Unit
 ) : RecyclerView.Adapter<MusicAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -24,17 +24,14 @@ class MusicAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val metadata = musicList[position]
         holder.musicTextView.text = metadata.title
-        holder.itemView.setOnClickListener { itemClickListener(metadata) }
+        holder.itemView.setOnClickListener { itemClickListener(position, metadata) }
     }
 
-    override fun getItemCount(): Int {
-        return musicList.size
-    }
+    override fun getItemCount(): Int = musicList.size
+
     data class MediaMetadata(
         val title: String,
         val data: String,
         val duration: Long
     )
-
 }
-

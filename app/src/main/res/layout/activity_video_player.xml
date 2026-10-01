@@ -6,17 +6,39 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <TextView
-        android:id="@+id/videoTitle"
+    <LinearLayout
+        android:id="@+id/videoTopBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title of the video"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:layout_margin="10dp"
-        android:padding="10dp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingTop="36dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="12dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:padding="8dp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@android:color/white" />
+
+        <TextView
+            android:id="@+id/videoTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="Title of the video"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <androidx.media3.ui.PlayerView
         android:id="@+id/exoPlayerView"

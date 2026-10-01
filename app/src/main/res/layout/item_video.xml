@@ -1,23 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:background="?attr/selectableItemBackground">
 
-    <ImageView
-        android:id="@+id/videoImageView"
-        android:layout_width="60dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/videoCard"
+        android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_centerVertical="true"
-        android:scaleType="centerCrop" />
+        app:cardCornerRadius="6dp"
+        app:cardElevation="2dp">
+
+        <ImageView
+            android:id="@+id/videoImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/videoTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_toEndOf="@+id/videoImageView"
         android:layout_centerVertical="true"
-        android:padding="16dp"
-        android:textSize="16sp" />
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@id/videoCard"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
